@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "procurement-navigator-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/procurementNavigator/ProcurementNavigatorWebPart.js",
+          "manifest": "./src/webparts/procurementNavigator/ProcurementNavigatorWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "ProcurementNavigatorWebPartStrings": "lib/webparts/procurementNavigator/loc/{locale}.js"
+  }
+}

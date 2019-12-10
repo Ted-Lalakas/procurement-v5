@@ -1,0 +1,13 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "procurement-navigator-client-side-solution",
+    "id": "bf69f4b7-3350-4a70-b3d9-1c9573a9343c",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "isDomainIsolated": false
+  },
+  "paths": {
+    "zippedPackage": "solution/procurement-navigator.sppkg"
+  }
+}
