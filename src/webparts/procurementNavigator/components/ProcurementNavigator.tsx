@@ -13,94 +13,94 @@ export default class ProcurementNavigator extends React.Component<any, any, any>
     super(props);
 
     this._onChange = this._onChange.bind(this);
-  //   // mockArray.map(index => {
-  //   //   console.log(index);
-  //   //   index.showEnd = false;
-  //   //   index.questionId == 1 ?
-  //   //     index.visible = true
-  //   //     : index.visible = false;    
-  //   // })
-
-  //   // const firstQuestion = mockArray.filter( n => n.questionId == 1 );
-
-  //   // this.state = {
-  //   //   mockArray,
-  //   //   tabsDisplay: [ ...firstQuestion ] 
-  //   // }
 
     const firstQuestion = mockArray.filter( n => n.questionId == 1 );
 
+    firstQuestion.map( index => index.endText = "" );
+
     this.state = {
-      mockArray,
-      tabsDisplay: [ ...firstQuestion ] 
+      tabsDisplay: [ ...firstQuestion ]
     }
 
   }
 
-  // firstQuestion = mockArray.filter( n => n.questionId == 1 );
-
-  // state = {
-  //       mockArray,
-  //       tabsDisplay: [ ...this.firstQuestion ] 
-  // }
-
   componentDidMount() {
+    console.log("-------------------------------------------------------------------------");
     console.log('Did Mount');
-    console.dir(this.state);
+    console.dir(this.state.tabsDisplay);
+    console.log("-------------------------------------------------------------------------");
   }
 
   componentDidUpdate() {
+    console.log("-------------------------------------------------------------------------");
     console.log('Did Update');
-    console.dir(this.state);
+    console.dir(this.state.tabsDisplay);
+    console.log("-------------------------------------------------------------------------");
   }
 
-  //Set an array of all items that should be visible
-    // let myArr = this.state.mockArray.filter(question => question.visible == true);
-
     _onChange(ev: React.FormEvent<HTMLInputElement>, option: IChoiceGroupOption) {
-      // console.log(ev.currentTarget);
-      // console.log(ev.target);
-      // const selectedInput = ev.currentTarget;
-      // console.log("THIS IS IT!: "+option.labelId);
 
-      // const question = [...this.state.tabsDisplay];
-      
-        // if ( option.labelId > n.questionId ) {
-        //   n.visible = false;
-        // }
+      console.log("-------------------------------------------------------------------------");
 
-        //question.choiceTextA
+      if ( option.id == option.labelId ) {
 
-        // if ( option.id == n.questionId ) {
-        //   // console.log(n.questionId);
-        //   // console.log(option.id);
-        //   n.visible = true;          
-        // } else {
-        //   if ( (option.id < n.questionId) ) {
-        //     n.visible = false; 
-        //   } else {
-        //     n.visible = true; 
-        //   }
-        // }
+        //tabsDisplay
+        const existsSelectedTab = this.state.tabsDisplay.findIndex(element => option.labelId === element.questionId);
+        const rollBackQuestions = this.state.tabsDisplay.slice(0, existsSelectedTab+1);
+        const updatedTabEndText = [...rollBackQuestions];
+        const updatedIndex = rollBackQuestions.findIndex( n => n.questionId === option.labelId );
 
-      
+        let endTextValue = "";
+        switch(option.key) {
+          case "1": 
+            endTextValue = updatedTabEndText[updatedIndex].endTextA;
+            break;
+          case "2": 
+            endTextValue = updatedTabEndText[updatedIndex].endTextB;
+            break;
+          case "3": 
+            endTextValue = updatedTabEndText[updatedIndex].endTextC;
+            break;
+        }
 
+        updatedTabEndText[updatedIndex] = {
+          ...updatedTabEndText[updatedIndex],
+          endText: endTextValue
+        }
 
+        this.setState(
+          {
+            tabsDisplay: [
+              ...updatedTabEndText
+            ]
+          }
+        );
 
-      // const rollBackQuestions = () => {
-      //   this.state.tabsDisplay.map( (n, index) => {
-      //     console.log(index);
-      //   })
-      // }
+      } else {
+        //current tab => option.labelId's show END TEXT == FALSE
+        const updatedTabEndText = [...this.state.tabsDisplay];
 
+        updatedTabEndText.map( n => {
+          n.endText = "";
+        });
 
-      //Remove entries if someone has rolled back on the questions
-      const found = this.state.tabsDisplay.findIndex(element => element.questionId == option.labelId);
+        this.setState(
+          {
+            tabsDisplay: [
+              ...updatedTabEndText
+            ]
+          }
+        );
 
-      if(found) {
-        const rollBackQuestions = this.state.tabsDisplay.slice(found);
-        const addQuestion = this.state.mockArray.filter( n => n.questionId == option.id );
+        //Find the index in TabsDisplay array of the labelId (ID of the TAB) CLICKED ON 
+        const existsSelectedTab = this.state.tabsDisplay.findIndex(element => option.labelId === element.questionId);
+        // console.log("SHOULD SLICE: "+existsSelectedTab);
 
+        const rollBackQuestions = this.state.tabsDisplay.slice(0, existsSelectedTab+1);
+        // console.log("Rollback:");
+        // console.dir(rollBackQuestions);
+
+        const addQuestion = mockArray.filter( n => n.questionId === option.id );
         this.setState(
           {
             tabsDisplay: [
@@ -108,23 +108,8 @@ export default class ProcurementNavigator extends React.Component<any, any, any>
               ...addQuestion
             ]
           }
-        ) 
-      } else {
-        const addQuestion = this.state.mockArray.filter( n => n.questionId == option.id );
-
-        this.setState(
-          {
-            tabsDisplay: [
-              ...this.state.tabsDisplay,
-              ...addQuestion
-            ]
-          }
-        ) 
+        );
       }
-
-      
-
-
     }
 
   render(): React.ReactElement {
@@ -142,22 +127,17 @@ export default class ProcurementNavigator extends React.Component<any, any, any>
                     <ChoiceGroup
                       options={
                         !a.choiceC ? 
-                          [{ key: "1", id: a.choiceA, text: a.choiceTextA, labelId: a.questionId },
-                          { key: "2", id: a.choiceB, text: a.choiceTextB, labelId: a.questionId }]
+                          [{ key: "1", id: a.choiceA, text: a.choiceTextA, labelId: a.questionId, checked: false },
+                          { key: "2", id: a.choiceB, text: a.choiceTextB, labelId: a.questionId, checked: false }]
                           :
-                          [{ key: "1", id: a.choiceA, text: a.choiceTextA, labelId: a.questionId },
-                          { key: "2", id: a.choiceB, text: a.choiceTextB, labelId: a.questionId },
-                          { key: "3", id: a.choiceC, text: a.choiceTextC, labelId: a.questionId }]
+                          [{ key: "1", id: a.choiceA, text: a.choiceTextA, labelId: a.questionId, checked: false },
+                          { key: "2", id: a.choiceB, text: a.choiceTextB, labelId: a.questionId, checked: false },
+                          { key: "3", id: a.choiceC, text: a.choiceTextC, labelId: a.questionId, checked: false }]
                       }
-                      // selectedKey={question.questionId}
                       onChange={this._onChange}
-                      // onClick={test}
                       ariaLabelledBy='Procurement Form'
-                    />
-                    { a.showEnd ? 
-                      <div>show end</div>
-                      : null
-                    }
+                    />                    
+                    <div>{a.endText}</div>                    
                     </div>
                     </div>
                 </div>
