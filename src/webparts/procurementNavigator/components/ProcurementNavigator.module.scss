@@ -6,7 +6,6 @@
   .container {
     max-width: 700px;
     margin: 0px auto;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
 
     .questionTab {
       box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
@@ -16,26 +15,39 @@
         @include ms-fontColor-white;
         background-color: #FFF;
         color: #000;
-        padding: 20px;
+        padding: 30px;
         border: 1px solid #666;
         margin-bottom: 20px;
       
-    
         .column {
           @include ms-Grid-col;
           @include ms-lg10;
           @include ms-xl8;
           @include ms-xlPush2;
           @include ms-lgPush1;
-          animation-name: fade-in;
+          animation-name: fadeIn;
           animation-fill-mode: both;
           animation-duration: 1.0s;
+          left: 0 !important;
+          width: 100% !important;
+
+          .headingText { 
+            float:left;
+            margin-top: 0;
+           }
+
+          .questionText { 
+            float:right; 
+            margin-top: 5px;
+          }
+
+          .choiceGroup { clear: both; }
 
           .endtext {
             background-color: bisque;
             margin-top: 20px;
             padding: 10px;
-            animation-name: fade-in;
+            animation-name: fadeIn;
             animation-fill-mode: both;
             animation-duration: 1.5s;
           }
@@ -44,14 +56,7 @@
     }
   }
 
-  $animationDelay: 1;
-  @for $i from 1 through 15 {
-    .projects div:nth-of-type(#{$i}) {
-      animation-delay: #{0.3+($i)/30}s;
-    }
-  }
-
-  @keyframes fade-in {
+  @keyframes fadeIn {
     0% { opacity: 0; }
     100% { opacity: 1; }
   }

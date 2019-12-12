@@ -4,7 +4,6 @@ import styles from './ProcurementNavigator.module.scss';
 import { ChoiceGroup, IChoiceGroupOption } from 'office-ui-fabric-react/lib/ChoiceGroup';
 import { mockArray } from './QuestionData';
 
-
 // export default class ProcurementNavigator extends React.Component<IProcurementNavigatorProps, {}> {
 export default class ProcurementNavigator extends React.Component<any, any, any> {
   constructor(props:any) {
@@ -108,9 +107,10 @@ export default class ProcurementNavigator extends React.Component<any, any, any>
                 <div className={ styles.questionTab } key={a.questionId}>
                   <div className={ styles.row }>  
                     <div className={ styles.column }>
-                      <h2>{a.title}</h2>
-                      <p>{a.questionText}</p>
+                      <h2 className={ styles.headingText }>{a.title}</h2>
+                      <p className={ styles.questionText }>{a.questionText}</p>
                       <ChoiceGroup
+                        className={ styles.choiceGroup }
                         selectedKey={a.selectedKey !== null ? a.selectedKey : null }
                         options={
                           !a.choiceC ? 
