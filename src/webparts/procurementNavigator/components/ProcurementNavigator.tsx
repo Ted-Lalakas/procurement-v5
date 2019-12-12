@@ -107,27 +107,27 @@ export default class ProcurementNavigator extends React.Component<any, any, any>
               return (
                 <div className={ styles.questionTab } key={a.questionId}>
                   <div className={ styles.row }>  
-                  <div className={ styles.column }>
-                    <h2>{a.title}</h2>
-                    <p>{a.questionText}</p>
-                    <ChoiceGroup
-                      selectedKey={a.selectedKey !== null ? a.selectedKey : null }
-                      options={
-                        !a.choiceC ? 
-                          [{ key: "1", id: a.choiceA, text: a.choiceTextA, labelId: a.questionId },
-                          { key: "2", id: a.choiceB, text: a.choiceTextB, labelId: a.questionId }]
-                          :
-                          [{ key: "1", id: a.choiceA, text: a.choiceTextA, labelId: a.questionId },
-                          { key: "2", id: a.choiceB, text: a.choiceTextB, labelId: a.questionId },
-                          { key: "3", id: a.choiceC, text: a.choiceTextC, labelId: a.questionId }]
-                      }
-                      onChange={this._onChange}
-                      ariaLabelledBy='Procurement Form'
-                    />
-                    { a.endText ? 
-                      <div className={styles.endtext}>{a.endText}</div>
-                      : null }                           
-                    </div>
+                    <div className={ styles.column }>
+                      <h2>{a.title}</h2>
+                      <p>{a.questionText}</p>
+                      <ChoiceGroup
+                        selectedKey={a.selectedKey !== null ? a.selectedKey : null }
+                        options={
+                          !a.choiceC ? 
+                            [{ key: "1", id: a.choiceA, text: a.choiceTextA, labelId: a.questionId },
+                            { key: "2", id: a.choiceB, text: a.choiceTextB, labelId: a.questionId }]
+                            :
+                            [{ key: "1", id: a.choiceA, text: a.choiceTextA, labelId: a.questionId },
+                            { key: "2", id: a.choiceB, text: a.choiceTextB, labelId: a.questionId },
+                            { key: "3", id: a.choiceC, text: a.choiceTextC, labelId: a.questionId }]
+                        }
+                        onChange={this._onChange}
+                        ariaLabelledBy='Procurement Form'
+                      />
+                      { a.endText ? 
+                        <div className={styles.endtext}>{a.endText}</div>
+                        : null }                           
+                      </div>
                     </div>
                 </div>
               );  
