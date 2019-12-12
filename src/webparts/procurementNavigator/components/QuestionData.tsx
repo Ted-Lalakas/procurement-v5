@@ -7,7 +7,7 @@ export const mockArray:any = [
     questionText: "Question 1: Text",  
     choiceTextA: "Go to question 2", 
     choiceA: 2,
-    choiceTextB: "Go to q3",
+    choiceTextB: "Go to question 3",
     choiceB: 3,
     choiceTextC: "END HERE WITH END TEXT",
     choiceC: 1,
