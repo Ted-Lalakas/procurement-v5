@@ -123,8 +123,10 @@ export default class ProcurementNavigator extends React.Component<any, any, any>
                       }
                       onChange={this._onChange}
                       ariaLabelledBy='Procurement Form'
-                    />                    
-                    <div>{a.endText}</div>                    
+                    />
+                    { a.endText ? 
+                      <div className={styles.endtext}>{a.endText}</div>
+                      : null }                           
                     </div>
                     </div>
                 </div>

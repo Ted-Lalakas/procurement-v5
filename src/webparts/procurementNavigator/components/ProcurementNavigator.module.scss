@@ -25,6 +25,12 @@
         @include ms-xl8;
         @include ms-xlPush2;
         @include ms-lgPush1;
+
+        .endtext {
+          background-color: bisque;
+          margin-top: 20px;
+          padding: 10px;
+        }
       }
     }
   }
