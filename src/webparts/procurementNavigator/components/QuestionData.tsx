@@ -2,7 +2,7 @@
 
 export const mockArray:any = [
   { 
-    title: "This is the first question",
+    Title: "This is the first question",
     questionId: 1, 
     questionText: "Question 1: Text",   
     choiceA: 2,
@@ -16,7 +16,7 @@ export const mockArray:any = [
     endTextC: "SHOW ME TEXT"
   },
   { 
-    title: "This is the second question",
+    Title: "This is the second question",
     questionId: 2, 
     questionText: "Question 2: Text", 
     choiceA: 3, 
@@ -30,7 +30,7 @@ export const mockArray:any = [
     endTextC: "This is the end of the series: Choice C was made"
   },
   { 
-    title: "This is the third question",
+    Title: "This is the third question",
     questionId: 3, 
     questionText: "Question 3: Text",  
     choiceA: 3,
@@ -44,7 +44,7 @@ export const mockArray:any = [
     endTextC: ""
   },
   { 
-    title: "This is the fourth question",
+    Title: "This is the fourth question",
     questionId: 4, 
     questionText: "Question 4: Text", 
     choiceA: 5, 
@@ -58,7 +58,7 @@ export const mockArray:any = [
     endTextC: ""
   },
   { 
-    title: "This is the fifth question",
+    Title: "This is the fifth question",
     questionId: 5, 
     questionText: "Question 5: Text",  
     choiceA: 11, 
@@ -72,7 +72,7 @@ export const mockArray:any = [
     endTextC: "End text for choice C"
   },
   { 
-    title: "This is the sixth question",
+    Title: "This is the sixth question",
     questionId: 6, 
     questionText: "Question 6: Text", 
     choiceA: 7, 
@@ -86,7 +86,7 @@ export const mockArray:any = [
     endTextC: ""
   },
   { 
-    title: "This is the seventh question",
+    Title: "This is the seventh question",
     questionId: 7, 
     questionText: "Question 7: Text",  
     choiceA: 8,
@@ -100,7 +100,7 @@ export const mockArray:any = [
     endTextC: ""
   },
   { 
-    title: "This is the eighth question",
+    Title: "This is the eighth question",
     questionId: 8, 
     questionText: "Question 8: Text", 
     choiceA: 9, 
@@ -114,7 +114,7 @@ export const mockArray:any = [
     endTextC: ""
   },
   { 
-    title: "This is the nineth question",
+    Title: "This is the nineth question",
     questionId: 9, 
     questionText: "Question 9: Text", 
     choiceA: 9, 
@@ -128,7 +128,7 @@ export const mockArray:any = [
     endTextC: ""
   },
   { 
-    title: "This is the tenth question",
+    Title: "This is the tenth question",
     questionId: 10, 
     questionText: "Question 10: Text",  
     choiceA: 11,
@@ -142,7 +142,7 @@ export const mockArray:any = [
     endTextC: ""
   },
   { 
-    title: "This is the eleventh question",
+    Title: "This is the eleventh question",
     questionId: 11, 
     questionText: "Question 11: Text",  
     choiceA: 11, 
