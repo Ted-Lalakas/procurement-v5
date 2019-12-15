@@ -42,6 +42,7 @@ export default class ProcurementNavigatorWebPart extends BaseClientSideWebPart<I
       console.log("LOCAL");
       this.checkConditionPassToRender(mockArray);
     } else {
+      // If online then grab the list and .THEN once that is done render the component to the DOM.
       console.log("ONLINE");
       this._getListItems().then(response => {      
         this.checkConditionPassToRender(response);
@@ -49,6 +50,8 @@ export default class ProcurementNavigatorWebPart extends BaseClientSideWebPart<I
     }
   }
 
+  // Function to run inside the render methods IF statement so that I can pass the correct array depending on the environment
+  // Pass the ProcurementNavigator PROP elements and envoke the ReactDom.render method inside the asyncronous call
   private checkConditionPassToRender(arrayPassed:any[]) {
     const element: React.ReactElement<IProcurementNavigatorProps> = React.createElement(
       ProcurementNavigator,
