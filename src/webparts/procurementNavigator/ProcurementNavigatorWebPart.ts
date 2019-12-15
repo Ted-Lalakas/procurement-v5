@@ -10,7 +10,7 @@ import {
 import * as strings from 'ProcurementNavigatorWebPartStrings';
 import ProcurementNavigator from './components/ProcurementNavigator';
 import { IProcurementNavigatorProps } from './components/IProcurementNavigatorProps';
-import { mockArray } from './components/QuestionData'
+import { mockArray } from './components/QuestionData';
 import { Environment, EnvironmentType } from '@microsoft/sp-core-library';
 import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
 
@@ -34,40 +34,35 @@ export default class ProcurementNavigatorWebPart extends BaseClientSideWebPart<I
       }) as Promise<any[]>;
   }
 
-
-  public arrayActive;
-
   public render(): void {
     // Check if the app is running on local or online environment
     if (!this._isSharePoint) {
       console.log("LOCAL");
-      // this.setState({ onlineArray: mockArray });
-      this.arrayActive = mockArray;
-      // console.dir(this.props.context);
+      // Running locally so use the MockArray
+      const element: React.ReactElement<IProcurementNavigatorProps> = React.createElement(
+        ProcurementNavigator,
+        {
+          description: this.properties.description,
+          context: this.context,
+          arrayToUse: mockArray
+        }
+      );    
+      ReactDom.render(element, this.domElement);
     } else {
       console.log("NOT LOCAL!");
-      console.log("LINK: "+this.context);
-      
-      //THE PROBLEM IS HERE!!!!!
-      //This will change to an online list
-      this._getListItems().then(response => {
-        this.arrayActive = response;
-        // this.setState({ onlineArray: response });
-        console.log(response);
+      // Running online so use List Data
+      this._getListItems().then(response => {      
+        const element: React.ReactElement<IProcurementNavigatorProps> = React.createElement(
+          ProcurementNavigator,
+          {
+            description: this.properties.description,
+            context: this.context,
+            arrayToUse: response
+          }
+        );    
+        ReactDom.render(element, this.domElement);
       });
     }
-
-
-    const element: React.ReactElement<IProcurementNavigatorProps > = React.createElement(
-      ProcurementNavigator,
-      {
-        description: this.properties.description,
-        context: this.context,
-        arrayToUse: this.arrayActive
-      }
-    );
-
-    ReactDom.render(element, this.domElement);
   }
 
   protected onDispose(): void {

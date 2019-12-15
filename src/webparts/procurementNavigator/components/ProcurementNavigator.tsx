@@ -11,6 +11,11 @@ export default class ProcurementNavigator extends React.Component<any, any, any>
   constructor(props:any) {
     super(props);
 
+    console.log("-------------------------------------------------------------------------");
+    console.log("CONSTRUCTOR");
+    console.log(this.props);
+    console.log("-------------------------------------------------------------------------");
+
     // Get the first element and pass it some extra values
     const firstQuestion = this.props.arrayToUse.filter( n => n.questionId == 1 );
     firstQuestion.endText = "";
@@ -23,39 +28,6 @@ export default class ProcurementNavigator extends React.Component<any, any, any>
 
     //Bind "this" to the function so that it can use this.state
     this._onChange = this._onChange.bind(this);
-  }
-
-  // private get _isSharePoint(): boolean {
-  //   return (Environment.type === EnvironmentType.SharePoint || Environment.type === EnvironmentType.ClassicSharePoint);
-  // }
-  
-  // private _getListItems(): Promise<any[]> {
-  //   return this.props.context.spHttpClient.get(this.props.context.pageContext.web.absoluteUrl + "/_api/web/lists/getByTitle('procurementNavigator')/items?$select=Id,Title,questionId,questionText,choiceA,choiceB,choiceC,choiceTextA,choiceTextB,choiceTextC,endTextA,endTextB,endTextC", SPHttpClient.configurations.v1)
-  //     .then((response: SPHttpClientResponse) => {
-  //       return response.json();
-  //     })
-  //     .then(jsonResponse => {
-  //       return jsonResponse.value;
-  //     }) as Promise<any[]>;
-  // }
-
-  public questionsList:any;
-
-  public componentWillMount() {
-    // // Check if the app is running on local or online environment
-    // if (!this._isSharePoint) {
-    //   console.log("LOCAL");
-    //   this.setState({ onlineArray: mockArray });
-    //   // console.dir(this.props.context);
-    // } else {
-    //   // console.log("NOT LOCAL!");
-    //   // console.log("LINK: "+this.props.context);
-    //   //This will change to an online list
-    //   this._getListItems().then(response => {
-    //     // this.questionsList = response;
-    //     this.setState({ onlineArray: response });
-    //   });
-    // }
   }
 
   // For testing purposes. Can be removed.
@@ -160,7 +132,7 @@ export default class ProcurementNavigator extends React.Component<any, any, any>
                         ariaLabelledBy='Procurement Form'
                       />
                       { a.endText ? 
-                        <div className={styles.endtext}>{a.endText}</div>
+                        <div className={styles.endtext} dangerouslySetInnerHTML={{ __html: a.endText }} />
                         : null }                           
                       </div>
                     </div>
