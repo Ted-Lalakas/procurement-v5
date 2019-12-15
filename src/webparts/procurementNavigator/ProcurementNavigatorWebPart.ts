@@ -16,6 +16,8 @@ import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
 
 export interface IProcurementNavigatorWebPartProps {
   description: string;
+  context: any;
+  arrayToUse: any[];
 }
 
 export default class ProcurementNavigatorWebPart extends BaseClientSideWebPart<IProcurementNavigatorWebPartProps> {
@@ -38,31 +40,25 @@ export default class ProcurementNavigatorWebPart extends BaseClientSideWebPart<I
     // Check if the app is running on local or online environment
     if (!this._isSharePoint) {
       console.log("LOCAL");
-      // Running locally so use the MockArray
-      const element: React.ReactElement<IProcurementNavigatorProps> = React.createElement(
-        ProcurementNavigator,
-        {
-          description: this.properties.description,
-          context: this.context,
-          arrayToUse: mockArray
-        }
-      );    
-      ReactDom.render(element, this.domElement);
+      this.checkConditionPassToRender(mockArray);
     } else {
-      console.log("NOT LOCAL!");
-      // Running online so use List Data
+      console.log("ONLINE");
       this._getListItems().then(response => {      
-        const element: React.ReactElement<IProcurementNavigatorProps> = React.createElement(
-          ProcurementNavigator,
-          {
-            description: this.properties.description,
-            context: this.context,
-            arrayToUse: response
-          }
-        );    
-        ReactDom.render(element, this.domElement);
+        this.checkConditionPassToRender(response);
       });
     }
+  }
+
+  private checkConditionPassToRender(arrayPassed:any[]) {
+    const element: React.ReactElement<IProcurementNavigatorProps> = React.createElement(
+      ProcurementNavigator,
+      {
+        description: this.properties.description,
+        context: this.context,
+        arrayToUse: arrayPassed
+      }
+    );    
+    ReactDom.render(element, this.domElement);
   }
 
   protected onDispose(): void {

@@ -1,10 +1,6 @@
 import * as React from 'react';
-// import { Environment, EnvironmentType } from '@microsoft/sp-core-library';
-// import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
 import styles from './ProcurementNavigator.module.scss';
-// import { IProcurementNavigatorProps } from './IProcurementNavigatorProps';
 import { ChoiceGroup, IChoiceGroupOption } from 'office-ui-fabric-react/lib/ChoiceGroup';
-// import { mockArray } from './QuestionData';
 
 // export default class ProcurementNavigator extends React.Component<IProcurementNavigatorProps, {}> {
 export default class ProcurementNavigator extends React.Component<any, any, any> {
@@ -50,10 +46,10 @@ export default class ProcurementNavigator extends React.Component<any, any, any>
     // When the TAB == OPTION Selected
     // This displays END TEXT and ENDS the question sequence
     if ( option.id == option.labelId ) {
-      const existsSelectedTab = this.state.tabsDisplay.findIndex(element => option.labelId === element.questionId);
-      const rollBackQuestions = this.state.tabsDisplay.slice(0, existsSelectedTab+1);
-      const updatedEntriesWithEndText = [...rollBackQuestions];
-      const updatedIndex = rollBackQuestions.findIndex( n => n.questionId === option.labelId );
+      const existingSelectedTab = this.state.tabsDisplay.findIndex( element => option.labelId === element.questionId );
+      const existingQuestions = this.state.tabsDisplay.slice( 0, existingSelectedTab + 1 );
+      const updatedEntriesWithEndText = [...existingQuestions];
+      const updatedIndex = existingQuestions.findIndex( n => n.questionId === option.labelId );
 
       // Assign the correct End Text to be shown
       let endTextValue:string = "";
@@ -82,12 +78,12 @@ export default class ProcurementNavigator extends React.Component<any, any, any>
 
     } else {
       // Find the index in TabsDisplay array of the labelId (ID of the TAB) CLICKED ON 
-      const existsSelectedTab = this.state.tabsDisplay.findIndex(element => option.labelId === element.questionId);
-      const rollBackQuestions = this.state.tabsDisplay.slice(0, existsSelectedTab+1);
+      const existingSelectedTab = this.state.tabsDisplay.findIndex( element => option.labelId === element.questionId );
+      const existingQuestions = this.state.tabsDisplay.slice(0, existingSelectedTab + 1 );
 
       // Add the extra variables to the last entry in the array
-      rollBackQuestions[rollBackQuestions.length - 1].selectedKey = option.key;
-      rollBackQuestions[rollBackQuestions.length - 1].endText = "";
+      existingQuestions[existingQuestions.length - 1].selectedKey = option.key;
+      existingQuestions[existingQuestions.length - 1].endText = "";
 
       // This is the next element to appear so I give it "" so it is not selected.
       const addQuestion = this.props.arrayToUse.filter( n => n.questionId === option.id );
@@ -97,7 +93,7 @@ export default class ProcurementNavigator extends React.Component<any, any, any>
       // Update state with the previous entries and the next question
       this.setState({
           tabsDisplay: [
-            ...rollBackQuestions,
+            ...existingQuestions,
             ...addQuestion
           ]
       });
