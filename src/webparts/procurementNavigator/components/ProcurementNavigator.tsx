@@ -8,8 +8,7 @@ export default class ProcurementNavigator extends React.Component<any, any, any>
     super(props);
 
     console.log("-------------------------------------------------------------------------");
-    console.log("CONSTRUCTOR");
-    console.log(this.props);
+    console.log("[ProcurementNavigator.tsx] CONSTRUCTOR",this.props);
     console.log("-------------------------------------------------------------------------");
 
     // Get the first element and pass it some extra values
@@ -29,16 +28,14 @@ export default class ProcurementNavigator extends React.Component<any, any, any>
   // For testing purposes. Can be removed.
   public componentDidMount() {
     console.log("-------------------------------------------------------------------------");
-    console.log('Did Mount');
-    console.dir(this.state);
+    console.log('[ProcurementNavigator.tsx] componentDidMount',this.state);
     console.log("-------------------------------------------------------------------------");
   }
 
   // For testing purposes. Can be removed.
   public componentDidUpdate() {
     console.log("-------------------------------------------------------------------------");
-    console.log('Did Update');
-    console.dir(this.state);
+    console.log('[ProcurementNavigator.tsx] componentDidUpdate',this.state);
     console.log("-------------------------------------------------------------------------");
   }
 
